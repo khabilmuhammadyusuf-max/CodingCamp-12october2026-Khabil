@@ -1,0 +1,539 @@
+/* ============================================================
+   CSS VARIABLES — LIGHT & DARK THEMES
+   ============================================================ */
+:root {
+  --bg:          #f0f4f8;
+  --surface:     #ffffff;
+  --surface-alt: #f7f9fc;
+  --border:      #e2e8f0;
+  --text:        #1a202c;
+  --text-muted:  #718096;
+  --primary:     #4f46e5;
+  --primary-h:   #4338ca;
+  --secondary:   #64748b;
+  --secondary-h: #475569;
+  --danger:      #ef4444;
+  --danger-h:    #dc2626;
+  --success:     #22c55e;
+  --done-text:   #a0aec0;
+  --shadow:      0 2px 12px rgba(0,0,0,0.07);
+  --shadow-lg:   0 8px 30px rgba(0,0,0,0.12);
+  --radius:      14px;
+  --radius-sm:   8px;
+  --transition:  0.2s ease;
+}
+
+[data-theme="dark"] {
+  --bg:          #0f172a;
+  --surface:     #1e293b;
+  --surface-alt: #162032;
+  --border:      #2d3f55;
+  --text:        #f1f5f9;
+  --text-muted:  #94a3b8;
+  --primary:     #818cf8;
+  --primary-h:   #6366f1;
+  --secondary:   #94a3b8;
+  --secondary-h: #cbd5e1;
+  --danger:      #f87171;
+  --danger-h:    #ef4444;
+  --success:     #4ade80;
+  --done-text:   #475569;
+  --shadow:      0 2px 12px rgba(0,0,0,0.3);
+  --shadow-lg:   0 8px 30px rgba(0,0,0,0.45);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background var(--transition), color var(--transition);
+  padding-bottom: 40px;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.clock {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.date {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.btn-icon {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.btn-icon:hover { background: var(--border); transform: scale(1.1); }
+
+/* ============================================================
+   MAIN GRID
+   ============================================================ */
+.main-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .main-grid { grid-template-columns: 1fr; padding: 0 16px; }
+  .header { padding: 14px 18px; }
+  .clock { font-size: 1.5rem; }
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.card:hover { box-shadow: var(--shadow-lg); }
+
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: var(--text);
+  letter-spacing: 0.3px;
+}
+
+/* ============================================================
+   GREETING CARD
+   ============================================================ */
+.greeting-card { grid-column: 1 / -1; }
+
+.greeting-text {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.greeting-name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.display-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition);
+}
+
+.btn-text:hover { background: var(--surface-alt); }
+
+/* ============================================================
+   TIMER CARD
+   ============================================================ */
+.timer-display {
+  font-size: 4rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--primary);
+  letter-spacing: 4px;
+  margin: 10px 0 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-duration-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  justify-content: center;
+}
+
+.timer-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.timer-status {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  min-height: 1.2em;
+}
+
+/* ============================================================
+   TO-DO CARD
+   ============================================================ */
+.todo-card { grid-column: 1 / -1; }
+
+.todo-input-wrap {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.todo-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.task-count {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.sort-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.todo-list::-webkit-scrollbar { width: 5px; }
+.todo-list::-webkit-scrollbar-track { background: transparent; }
+.todo-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: background var(--transition), border-color var(--transition), opacity var(--transition);
+  animation: slideIn 0.2s ease;
+}
+
+.todo-item:hover { border-color: var(--primary); }
+
+.todo-item.done { opacity: 0.6; }
+
+.todo-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.todo-text {
+  flex: 1;
+  font-size: 0.95rem;
+  word-break: break-word;
+  transition: color var(--transition), text-decoration var(--transition);
+}
+
+.todo-item.done .todo-text {
+  text-decoration: line-through;
+  color: var(--done-text);
+}
+
+.todo-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.btn-sm {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+  color: var(--text-muted);
+}
+
+.btn-sm:hover { background: var(--border); color: var(--text); }
+
+.btn-sm.danger:hover { background: var(--danger); border-color: var(--danger); color: #fff; }
+
+.empty-state {
+  text-align: center;
+  padding: 32px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   QUICK LINKS CARD
+   ============================================================ */
+.links-card { grid-column: 1 / -1; }
+
+.link-input-wrap {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.input-half { flex: 1; min-width: 140px; }
+
+.links-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.link-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+  animation: slideIn 0.2s ease;
+}
+
+.link-chip:hover { border-color: var(--primary); transform: translateY(-2px); }
+
+.link-chip a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.link-chip a:hover { color: var(--primary); }
+
+.link-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding: 0;
+  line-height: 1;
+  transition: color var(--transition);
+}
+
+.link-delete:hover { color: var(--danger); }
+
+/* ============================================================
+   INPUTS & BUTTONS
+   ============================================================ */
+.input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color var(--transition), background var(--transition);
+  font-family: inherit;
+}
+
+.input:focus { border-color: var(--primary); background: var(--surface); }
+
+.input-sm {
+  width: 64px;
+  padding: 6px 10px;
+  flex: none;
+  text-align: center;
+}
+
+.label-sm {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.select-sm {
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  color: var(--text);
+  font-size: 0.82rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.select-sm:focus { border-color: var(--primary); }
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), opacity var(--transition);
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--primary-h); }
+
+.btn-secondary { background: var(--secondary); color: #fff; }
+.btn-secondary:hover:not(:disabled) { background: var(--secondary-h); }
+
+.btn-ghost {
+  background: var(--surface-alt);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover:not(:disabled) { background: var(--border); }
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  animation: fadeIn 0.15s ease;
+}
+
+.modal.hidden { display: none; }
+
+.modal-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.2s ease;
+}
+
+.modal-box h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.modal-box .input { width: 100%; margin-bottom: 16px; }
+
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
+/* ============================================================
+   MISC
+   ============================================================ */
+.error-msg {
+  font-size: 0.82rem;
+  color: var(--danger);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.error-msg.hidden { display: none; }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Timer pulsing when running */
+.timer-display.running {
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
+}
